@@ -8,9 +8,6 @@ env:
 before_install:
     - curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz | tar xvz
     - cd kafka_2.8.0-${KAFKA_VERSION}
-    - ./sbt update
-    - ./sbt package
-    - ./sbt assembly-package-dependency
     - bin/zookeeper-server-start.sh config/zookeeper.properties
     - bin/kafka-server-start.sh config/server.properties
 script:
