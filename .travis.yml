@@ -1,0 +1,11 @@
+language:
+    python
+python:
+    - 2.6
+    - 3.4
+env:
+    - KAFKA_VERSION=0.8.0
+    - KAFKA_VERSION=0.8.1
+    - KAFKA_VERSION=0.8.1.1
+before_install:
+    - curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz
