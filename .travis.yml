@@ -8,7 +8,7 @@ env:
 before_install:
     - curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz | tar xvz
     - cd kafka_2.8.0-${KAFKA_VERSION}
-    - bin/zookeeper-server-start.sh config/zookeeper.properties
-    - bin/kafka-server-start.sh config/server.properties
+    - bin/zookeeper-server-start.sh config/zookeeper.properties &
+    - bin/kafka-server-start.sh config/server.properties &
 script:
     - echo "success"
