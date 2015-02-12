@@ -10,7 +10,7 @@ XDG_CONFIG_DIR = xdg.BaseDirectory.save_config_path(APP_NAME)
 XDG_DATA_DIR = xdg.BaseDirectory.save_data_path(APP_NAME)
 
 app.config.update(dict(
-
+    HOSTS=["localhost:9092"]
     ))
 
 
@@ -38,11 +38,29 @@ def json_response(status, body={}):
     response.status = str(status)
     return response
 
+def get_kafka():
+    if not hasattr(flask.g, "kafka"):
+        flask.g.kafka = KafkaClient(app.config["HOSTS"])
+    return flask.g.kafka
 
-@app.route("/")
-@app.route("/<topic>/")
-@app.route("/<group>/<topic>/")
+def kafka_post(topic, message, key=None):
+    kafka = get_kafka()
+    if key is None:
+        producer = SimpleProducer(kafka)
+        producer.send_messages(topic, message)
+    else:
+        producer = KeyedProducer(kafka)
+        producer.send(topic, key, message)
+
+def kafka_get(topic, group=None):
+    kafka = get_kafka()
+
+
+@app.route("/", methods=["GET", "POST"])
+@app.route("/<topic>/", methods=["GET", "POST"])
+@app.route("/<group>/<topic>/", methods=["GET", "POST"])
 def flasfka(group=None, topic=None):
+    kafka_send("hello", "world")
     return json_response(200, "hello")
 
 
