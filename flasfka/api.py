@@ -28,7 +28,7 @@ def get_kafka_client():
 def get_kafka_producer():
     if not hasattr(flask.g, "kafka_producer"):
         client = get_kafka_client()
-        flask.g.kafka_producer = kafka.KeyedProducer(client, batch_send=True)
+        flask.g.kafka_producer = kafka.KeyedProducer(client)
     return flask.g.kafka_producer
 
 
