@@ -4,7 +4,7 @@ from __future__ import with_statement
 import flask
 import xdg.BaseDirectory
 from flasfka import app
-from kafka import SimpleProducer, KafkaClient, SimpleConsumer, KeyedProducer
+import kafka
 
 APP_NAME = "flasfka"
 XDG_CONFIG_DIR = xdg.BaseDirectory.save_config_path(APP_NAME)
@@ -14,7 +14,7 @@ XDG_DATA_DIR = xdg.BaseDirectory.save_data_path(APP_NAME)
 app.config.update(dict(
     HOSTS=["localhost:9092"],
     DEFAULT_GROUP="flasfka",
-    CONSUMER_TIMEOUT=1,
+    CONSUMER_TIMEOUT=0.1,
     CONSUMER_LIMIT=20
     ))
 
@@ -46,14 +46,14 @@ def json_response(status, body={}):
 
 def get_kafka_client():
     if not hasattr(flask.g, "kafka_client"):
-        flask.g.kafka_client = KafkaClient(app.config["HOSTS"])
+        flask.g.kafka_client = kafka.KafkaClient(app.config["HOSTS"])
     return flask.g.kafka_client
 
 
 def get_kafka_producer():
     if not hasattr(flask.g, "kafka_producer"):
         client = get_kafka_client()
-        flask.g.kafka_producer = KeyedProducer(client, batch_send=True)
+        flask.g.kafka_producer = kafka.KeyedProducer(client, batch_send=True)
     return flask.g.kafka_producer
 
 
@@ -63,9 +63,11 @@ def produce(topic, message, key=None):
     producer.send(topic, key, message)
 
 
-def consume(topic, group=app.config["DEFAULT_GROUP"].encode("utf-8"), limit=20):
+def consume(topic, group, limit=20):
+    if group is None:
+        group = app.config["DEFAULT_GROUP"].encode("utf-8")
     client = get_kafka_client()
-    consumer = SimpleConsumer(client, group, topic,
+    consumer = kafka.SimpleConsumer(client, group, topic,
             iter_timeout=app.config["CONSUMER_TIMEOUT"])
     res = []
     for n, message in enumerate(consumer):
