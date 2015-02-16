@@ -15,7 +15,7 @@ app.config.update(dict(
     HOSTS=["localhost:9092"],
     DEFAULT_GROUP="flasfka",
     CONSUMER_TIMEOUT=0.1,
-    CONSUMER_LIMIT=20
+    CONSUMER_LIMIT=100
     ))
 
 
@@ -36,9 +36,10 @@ def produce(topic, message, key=None):
     message = message.encode("utf-8")
     producer = get_kafka_producer()
     producer.send(topic, key, message)
+    producer.stop()
 
 
-def consume(topic, group, limit=20):
+def consume(topic, group, limit=app.config["CONSUMER_LIMIT"]):
     if group is None:
         group = app.config["DEFAULT_GROUP"].encode("utf-8")
     client = get_kafka_client()
@@ -49,6 +50,8 @@ def consume(topic, group, limit=20):
         res["messages"].append(message.message.value.decode("utf-8"))
         if n >= limit - 1:
             break
+    consumer.commit()
+    consumer.stop()
     return res
 
 
