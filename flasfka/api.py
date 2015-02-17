@@ -39,7 +39,7 @@ def produce(topic, message, key=None):
     producer.stop()
 
 
-def consume(topic, group, limit=app.config["CONSUMER_LIMIT"]):
+def consume(topic, group, limit):
     if group is None:
         group = app.config["DEFAULT_GROUP"].encode("utf-8")
     client = get_kafka_client()
@@ -58,21 +58,24 @@ def consume(topic, group, limit=app.config["CONSUMER_LIMIT"]):
 @app.route("/<topic>/", methods=["GET", "POST"])
 @app.route("/<topic>/<group_or_key>/", methods=["GET", "POST"])
 def flasfka(topic, group_or_key=None):
+    try:
+        topic = topic.encode("utf-8")
+        if group_or_key is not None:
+            group_or_key = group_or_key.encode("utf-8")
 
-    topic = topic.encode("utf-8")
-    if group_or_key is not None:
-        group_or_key = group_or_key.encode("utf-8")
+        client = get_kafka_client()
+        client.ensure_topic_exists(topic)
 
-    client = get_kafka_client()
-    client.ensure_topic_exists(topic)
-
-    if flask.request.method == "GET":
-        group = group_or_key
-        return flask.jsonify(consume(topic, group))
-    if flask.request.method == "POST":
-        key = group_or_key
-        produce(topic, flask.request.get_data(), key)
-        return flask.make_response(("", 204, {}))
+        if flask.request.method == "GET":
+            limit = int(flask.request.args.get("limit", app.config["CONSUMER_LIMIT"]))
+            group = group_or_key
+            return flask.jsonify(consume(topic, group, limit))
+        if flask.request.method == "POST":
+            key = group_or_key
+            produce(topic, flask.request.get_data(), key)
+            return flask.make_response(("", 204, {}))
+    except UnicodeDecodeError:
+        return flask.make_response("Flafska only accepts utf-8", 400, {})
 
 
 @app.after_request
