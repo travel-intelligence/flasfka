@@ -15,6 +15,6 @@ before_install:
 install:
     - pip install --upgrade pip
     - pip install coveralls
-    - pip install -r ./requirements.txt
+    - pip install -r requirements.txt
 script:
     - coverage run flasfka-serve --test
