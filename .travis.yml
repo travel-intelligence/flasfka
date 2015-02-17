@@ -10,10 +10,11 @@ env:
 before_install:
     - curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz | tar xvz
     - cd kafka_2.8.0-${KAFKA_VERSION}
-    - bin/zookeeper-server-start.sh config/zookeeper.properties &
-    - bin/kafka-server-start.sh config/server.properties &
+    - bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
+    - bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
 install:
+    - pip install --upgrade pip
     - pip install coveralls
-    - pip install -r requirements.txt
+    - pip install -r ./requirements.txt
 script:
-    - coverage  run flasfka-serve --test
+    - coverage run flasfka-serve --test
