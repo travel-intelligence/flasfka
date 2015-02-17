@@ -30,6 +30,7 @@ def get_kafka_producer():
 
 
 def produce(topic, message, key=None):
+    message = message.encode("utf-8")
     producer = get_kafka_producer()
     producer.send(topic, key, message)
     producer.stop()
@@ -44,7 +45,7 @@ def consume(topic, group, limit):
         )
     res = {"group": group.decode("utf-8"), "messages": []}
     for n, message in enumerate(consumer):
-        res["messages"].append(message.message.value)
+        res["messages"].append(message.message.value.decode("utf-8"))
         if n >= limit - 1:
             break
     consumer.commit()
