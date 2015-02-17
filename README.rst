@@ -1,6 +1,8 @@
 Flasfka
 =======
 
+|Build Status|
+
 Push/Pull on Kafka over HTTP
 
 API
@@ -36,3 +38,6 @@ Limitations
 
 Flafska only accepts utf-8 data. If you want to pass arbitrary data, it is
 better to encode it to base64 before.
+
+.. |Build Status| image:: https://travis-ci.org/travel-intelligence/flasfka.svg?branch=master
+    :target: https://travis-ci.org/travel-intelligence/flasfka
