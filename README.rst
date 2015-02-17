@@ -4,7 +4,7 @@ Flasfka
 Push/Pull on Kafka over HTTP
 
 API
-===
+---
 
 Send
 ----
@@ -30,3 +30,9 @@ default group ``flasfka``.
 
 This retrieves the last 20 messages posted to ``my-topic``, from the group
 ``my-group``.
+
+Limitations
+===========
+
+Flafska only accepts utf-8 data. If you want to pass arbitrary data, it is
+better to encode it to base64 before.
