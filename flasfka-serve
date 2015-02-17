@@ -2,12 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 
 # try to load a virtualenv from the PYTHON_VIRTUALENV environment
 # variable, or from the directory "venv"
 try:
     venv = os.getenv("PYTHON_VIRTUALENV", "venv") + "/bin/activate_this.py"
-    execfile(venv, dict(__file__=venv))
+    if sys.version_info.major == 2:
+        execfile(venv, dict(__file__=venv))
+    if sys.version_info.major == 3:
+        with open(venv, 'rb') as f:
+            compiled_code = compile(f.read(), venv, 'exec')
+            exec(compiled_code, dict(__file__=venv))
 except IOError:
     pass
 
