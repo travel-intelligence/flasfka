@@ -3,7 +3,6 @@ language:
 python:
     - 2.6
     - 2.7
-    - 3.4
 env:
     - KAFKA_VERSION=0.8.1
     - KAFKA_VERSION=0.8.1.1
