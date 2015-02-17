@@ -12,8 +12,7 @@ try:
         execfile(venv, dict(__file__=venv))
     if sys.version_info.major == 3:
         with open(venv, 'rb') as f:
-            compiled_code = compile(f.read(), venv, 'exec')
-            exec(compiled_code, dict(__file__=venv))
+            exec(compile(f.read(), venv, 'exec'), dict(__file__=venv))
 except IOError:
     pass
 
