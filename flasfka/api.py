@@ -2,13 +2,8 @@
 
 from __future__ import with_statement
 import flask
-import xdg.BaseDirectory
 from flasfka import app
 import kafka
-
-APP_NAME = "flasfka"
-XDG_CONFIG_DIR = xdg.BaseDirectory.save_config_path(APP_NAME)
-XDG_DATA_DIR = xdg.BaseDirectory.save_data_path(APP_NAME)
 
 
 app.config.update(dict(
@@ -16,7 +11,9 @@ app.config.update(dict(
     DEFAULT_GROUP="flasfka",
     CONSUMER_TIMEOUT=0.1,
     CONSUMER_LIMIT=100
-    ))
+))
+
+app.config.from_envvar("FLASFKA_CONFIG", silent=True)
 
 
 def get_kafka_client():
@@ -43,8 +40,9 @@ def consume(topic, group, limit):
     if group is None:
         group = app.config["DEFAULT_GROUP"].encode("utf-8")
     client = get_kafka_client()
-    consumer = kafka.SimpleConsumer(client, group, topic,
-            iter_timeout=app.config["CONSUMER_TIMEOUT"])
+    consumer = kafka.SimpleConsumer(
+        client, group, topic, iter_timeout=app.config["CONSUMER_TIMEOUT"]
+        )
     res = {"group": group.decode("utf-8"), "messages": []}
     for n, message in enumerate(consumer):
         res["messages"].append(message.message.value.decode("utf-8"))
@@ -67,7 +65,9 @@ def flasfka(topic, group_or_key=None):
         client.ensure_topic_exists(topic)
 
         if flask.request.method == "GET":
-            limit = int(flask.request.args.get("limit", app.config["CONSUMER_LIMIT"]))
+            limit = int(flask.request.args.get(
+                "limit", app.config["CONSUMER_LIMIT"]
+                ))
             group = group_or_key
             return flask.jsonify(consume(topic, group, limit))
         if flask.request.method == "POST":

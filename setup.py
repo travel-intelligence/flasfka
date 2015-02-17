@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from setuptools import setup
 
@@ -9,7 +9,6 @@ setup(
     packages=["flasfka"],
     install_requires=[
         "Flask >= 0.10",
-        "pyxdg >= 0.25",
         "kafka-python >= 0.9.2",
         ],
     scripts=["flasfka-serve"],

@@ -1,5 +1,5 @@
 #!/usr/bin/python2
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import os
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         import flasfka
         import unittest
         unittest.main(module="flasfka.tests",
-                argv=["flasfka-serve"], verbosity=2)
+                      argv=["flasfka-serve"], verbosity=2)
 
     if args.profile:
         app.config["PROFILE"] = True

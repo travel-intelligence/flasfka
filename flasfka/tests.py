@@ -8,9 +8,11 @@ import json
 import os
 from . import app
 
+
 def random_ascii_string(n=20):
     return ''.join(random.SystemRandom().choice(string.ascii_letters +
-        string.digits) for _ in range(n))
+                   string.digits) for _ in range(n))
+
 
 class FlafskaTestCase(unittest.TestCase):
 
@@ -31,7 +33,7 @@ class FlafskaTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         body = json.loads(response.data)
         self.assertEqual(body, {u'group': u'flasfka', u'messages':
-            [message.encode('string_escape')]})
+                         [message.encode('string_escape')]})
 
     def test_send_fetch_group(self):
         topic = random_ascii_string()
