@@ -12,11 +12,11 @@ before_install:
     - cd kafka_2.8.0-${KAFKA_VERSION}
     - bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
     - bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
+    - cd -
 install:
     - pip install --upgrade pip
     - pip install coveralls
     - pip install pep8
-    - ls
     - python setup.py install
 script:
     - pep8 setup.py flasfka-serve flasfka
