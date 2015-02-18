@@ -25,12 +25,17 @@ Fetch
 
     curl http://127.0.0.1:5000/my-topic/
 
+This retrieves the last 100 messages posted to ``my-topic``, from the
+default group ``flasfka``.
+
+    curl http://127.0.0.1:5000/my-topic/?limit=20
+
 This retrieves the last 20 messages posted to ``my-topic``, from the
 default group ``flasfka``.
 
     curl http://127.0.0.1:5000/my-topic/my-group/
 
-This retrieves the last 20 messages posted to ``my-topic``, from the group
+This retrieves the last 100 messages posted to ``my-topic``, from the group
 ``my-group``.
 
 Limitations
