@@ -13,9 +13,9 @@ are available. Put this in a file (for example ``/etc/flasfka.conf.py``):
 
 ::
 
-    HOSTS=["localhost:9092"],
-    DEFAULT_GROUP="flasfka",
-    CONSUMER_TIMEOUT=0.1,
+    HOSTS=["localhost:9092"]
+    DEFAULT_GROUP="flasfka"
+    CONSUMER_TIMEOUT=0.1
     CONSUMER_LIMIT=100
 
 The file will be read at flasfka startup, provided you export its path:
