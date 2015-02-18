@@ -73,7 +73,7 @@ Limitations
 ===========
 
 Flafska only accepts utf-8 data. If you want to pass arbitrary data, it is
-better to encode it to base64 before.
+recommended to encode it to a suitable format before (e.g. base64).
 
 .. |Build Status| image:: https://travis-ci.org/travel-intelligence/flasfka.svg?branch=master
     :target: https://travis-ci.org/travel-intelligence/flasfka
