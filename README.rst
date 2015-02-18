@@ -20,8 +20,8 @@ The file will be read at flasfka startup, provided you export its path:
 
     export FLASFKA_CONFIG=/etc/flasfka.conf.py
 
-How to use flasfka
-==================
+Usage
+=====
 
 Assuming flasfka is configured and running:
 
