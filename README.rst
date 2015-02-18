@@ -5,10 +5,27 @@ Flasfka
 
 Push/Pull on Kafka over HTTP
 
-API
----
+Configuration
+=============
 
-Send
+To configure how the server should talk to Kafka, the following variables
+are available. Put this in a file (for example ``/etc/flasfka.conf.py``):
+
+    HOSTS=["localhost:9092"],
+    DEFAULT_GROUP="flasfka",
+    CONSUMER_TIMEOUT=0.1,
+    CONSUMER_LIMIT=100
+
+The file will be read at flasfka startup, provided you export its path:
+
+    export FLASFKA_CONFIG=/etc/flasfka.conf.py
+
+How to use flasfka
+==================
+
+Assuming flasfka is configured and running:
+
+send
 ----
 
     curl -X POST --data-binary "hello world" "http://127.0.0.1:5000/my-topic/"
@@ -20,7 +37,7 @@ This pushes ``hello world`` to the topic ``my-topic``.
 This pushes ``hello again`` to the topic ``my-topic`` with the key
 ``my-key``.
 
-Fetch
+fetch
 -----
 
     curl http://127.0.0.1:5000/my-topic/
