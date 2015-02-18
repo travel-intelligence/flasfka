@@ -15,11 +15,10 @@ app.config.update(dict(
 
 app.config.from_envvar("FLASFKA_CONFIG", silent=True)
 
+app.config["KAFKA_CLIENT"]=kafka.KafkaClient(app.config["HOSTS"])
 
 def get_kafka_client():
-    if not hasattr(flask.g, "kafka_client"):
-        flask.g.kafka_client = kafka.KafkaClient(app.config["HOSTS"])
-    return flask.g.kafka_client
+    return app.config["KAFKA_CLIENT"]
 
 
 def get_kafka_producer():
