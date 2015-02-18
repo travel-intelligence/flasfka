@@ -76,10 +76,3 @@ def flasfka(topic, group_or_key=None):
             return flask.make_response(("", 204, {}))
     except UnicodeDecodeError:
         return flask.make_response("Flafska only accepts utf-8", 400, {})
-
-
-@app.after_request
-def debug_cache_off(response):
-    if app.config["DEBUG"]:
-        response.headers["Cache-Control"] = "no-cache, max-age=0"
-    return response
