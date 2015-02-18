@@ -1,7 +1,7 @@
 Flasfka
 =======
 
-|Build Status|
+|Build Status| |Coverage|
 
 Push/Pull on Kafka over HTTP
 
@@ -41,3 +41,6 @@ better to encode it to base64 before.
 
 .. |Build Status| image:: https://travis-ci.org/travel-intelligence/flasfka.svg?branch=master
     :target: https://travis-ci.org/travel-intelligence/flasfka
+
+.. |Coverage| image:: https://coveralls.io/repos/travel-intelligence/flasfka/badge.svg
+    :target: https://coveralls.io/r/travel-intelligence/flasfka
