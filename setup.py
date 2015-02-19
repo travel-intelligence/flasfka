@@ -12,7 +12,7 @@ VERSION = "1.0.0"
 
 if os.getenv("TRAVIS") is not None:
     GIT_TAG = run(["git", "describe"]).decode().strip()
-    if VERSION != GIT_TAG:
+    if not GIT_TAG.startswith(VERSION):
         sys.exit("The git tag does not match the release. Please fix.")
 
 setup(

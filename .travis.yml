@@ -25,3 +25,5 @@ deploy:
   user: chm.duquesne
   password:
     secure: GBx6CccfxAugh8VA8zzRHlzd2rgMMZ/U4SP6735uyZgK5xN1mt5KWLxjAmaEqY/oMeJVt1NDBBgVRRlK6Byv2atINR2sivs9Oil4Xh7XzH7s7hwd183foHYCslSnBBY6azgoMYf3xHsX5BcRQHvDesQLu9iyVu84CuFExB6ytlk=
+  on:
+    tags: true
