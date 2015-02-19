@@ -20,7 +20,7 @@ setup(
     version=VERSION,
     long_description=open("README.rst").read(),
     author="Christophe-Marie Duquesne",
-    author_email="chmd@chmd.fr"
+    author_email="chmd@chmd.fr",
     url="https://github.com/travel-intelligence/flasfka",
     download_url="https://github.com/travel-intelligence/flasfka/archive/%s.tar.gz" % VERSION,
     packages=["flasfka"],
