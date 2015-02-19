@@ -1,22 +1,27 @@
-language:
-    python
+language: python
 python:
-    - 2.7
-    - pypy
+- 2.7
+- pypy
 env:
-    - KAFKA_VERSION=0.8.1
-    - KAFKA_VERSION=0.8.1.1
+- KAFKA_VERSION=0.8.1
+- KAFKA_VERSION=0.8.1.1
 before_install:
-    - curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz | tar xvz
-    - cd kafka_2.8.0-${KAFKA_VERSION}
-    - bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
-    - bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
-    - cd -
+- curl https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_2.8.0-${KAFKA_VERSION}.tgz
+  | tar xvz
+- cd kafka_2.8.0-${KAFKA_VERSION}
+- bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &
+- bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &
+- cd -
 install:
-    - pip install --upgrade pip
-    - pip install coveralls
-    - python setup.py install
+- pip install --upgrade pip
+- pip install coveralls
+- python setup.py install
 script:
-    - coverage run flasfka-serve --test
+- coverage run flasfka-serve --test
 after_success:
-    - coveralls
+- coveralls
+deploy:
+  provider: pypi
+  user: chm.duquesne
+  password:
+    secure: GBx6CccfxAugh8VA8zzRHlzd2rgMMZ/U4SP6735uyZgK5xN1mt5KWLxjAmaEqY/oMeJVt1NDBBgVRRlK6Byv2atINR2sivs9Oil4Xh7XzH7s7hwd183foHYCslSnBBY6azgoMYf3xHsX5BcRQHvDesQLu9iyVu84CuFExB6ytlk=
