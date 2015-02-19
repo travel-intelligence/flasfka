@@ -8,7 +8,7 @@ from subprocess import check_output as run
 import sys
 import os
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 if os.getenv("TRAVIS") is not None:
     GIT_TAG = run(["git", "describe"]).decode().strip()
