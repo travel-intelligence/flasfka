@@ -8,7 +8,7 @@ from subprocess import check_output as run
 import sys
 import os
 
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 if os.getenv("TRAVIS") is not None:
     GIT_TAG = run(["git", "describe"]).decode().strip()
@@ -18,6 +18,7 @@ if os.getenv("TRAVIS") is not None:
 setup(
     name="flasfka",
     version=VERSION,
+    description=__doc__,
     long_description=open("README.rst").read(),
     author="Christophe-Marie Duquesne",
     author_email="chmd@chmd.fr",
