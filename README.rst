@@ -34,16 +34,15 @@ send
 
 ::
 
-    curl -X POST --data-binary "hello world" "http://127.0.0.1:5000/my-topic/"
+    curl -X POST --data-binary '{"messages": ["msg1", "msg2"]}' "http://127.0.0.1:5000/my-topic/"
 
-This pushes ``hello world`` to the topic ``my-topic``.
+This pushes ``msg1`` then ``msg2`` to the topic ``my-topic``.
 
 ::
 
-    curl -X POST --data-binary "hello again" "http://127.0.0.1:5000/my-topic/my-key/"
+    curl -X POST --data-binary '{"messages": ["msg3"]}' "http://127.0.0.1:5000/my-topic/my-key/"
 
-This pushes ``hello again`` to the topic ``my-topic`` with the key
-``my-key``.
+This pushes ``msg3`` to the topic ``my-topic`` with the key ``my-key``.
 
 fetch
 -----
@@ -52,28 +51,29 @@ fetch
 
     curl http://127.0.0.1:5000/my-topic/
 
-This retrieves the last 100 messages posted to ``my-topic``, from the
-default group ``flasfka``.
-
-::
-
-    curl http://127.0.0.1:5000/my-topic/?limit=20
-
-This retrieves the last 20 messages posted to ``my-topic``, from the
-default group ``flasfka``.
+This retrieves a maximum of 100 of the last messages posted to
+``my-topic``, from the default group ``flasfka``.
 
 ::
 
     curl http://127.0.0.1:5000/my-topic/my-group/
 
-This retrieves the last 100 messages posted to ``my-topic``, from the group
-``my-group``.
+This retrieves a maximum of 100 of the last messages posted to
+``my-topic``, from the group ``my-group``.
+
+::
+
+    curl http://127.0.0.1:5000/my-topic/?limit=20
+
+This retrieves a maximum of 20 of the last messages posted to
+``my-topic``, from the default group ``flasfka``.
 
 Limitations
 ===========
 
-Flafska only accepts utf-8 data. If you want to pass arbitrary data, it is
-recommended to encode it to a suitable format before (e.g. base64).
+Flafska only accepts json data, so your messages need to be in utf-8. If
+you want to pass arbitrary data, it is recommended to encode them to a
+suitable format before (e.g. base64).
 
 .. |Build Status| image:: https://travis-ci.org/travel-intelligence/flasfka.svg?branch=master
     :target: https://travis-ci.org/travel-intelligence/flasfka
