@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import with_statement
-from flasfka import app
+from flasfka import app, __version__
 import flask
 import kafka
 import json
@@ -89,3 +89,8 @@ def flasfka(topic, group_or_key=None):
                 400,
                 {}
             ))
+
+
+@app.route("/version/")
+def version():
+    return __version__

@@ -8,22 +8,25 @@ from subprocess import check_output as run
 import sys
 import os
 
-VERSION = "1.0.2"
+
+from flasfka import __version__
+
 
 if os.getenv("TRAVIS") is not None:
-    GIT_TAG = run(["git", "describe"]).decode().strip()
-    if not GIT_TAG.startswith(VERSION):
-        sys.exit("The git tag does not match the release. Please fix.")
+    GIT_VERSION = run(["git", "describe"]).decode().strip()
+    if not GIT_VERSION.startswith(__version__):
+        sys.exit("The version in git and in the code don't match. Please fix.")
 
 setup(
     name="flasfka",
-    version=VERSION,
+    version=__version__,
     description=__doc__,
     long_description=open("README.rst").read(),
     author="Christophe-Marie Duquesne",
     author_email="chmd@chmd.fr",
     url="https://github.com/travel-intelligence/flasfka",
-    download_url="https://github.com/travel-intelligence/flasfka/archive/%s.tar.gz" % VERSION,
+    download_url="https://github.com/travel-intelligence/flasfka/" +
+                 "archive/%s.tar.gz" % __version__,
     packages=["flasfka"],
     classifiers=[
         'Development Status :: 4 - Beta',

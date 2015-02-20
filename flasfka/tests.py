@@ -27,7 +27,7 @@ class FlafskaTestCase(unittest.TestCase):
         message = {"messages": [random_ascii_string()]}
 
         response = self.app.post("/" + topic + "/",
-                data=json.dumps(message))
+                                 data=json.dumps(message))
         self.assertEqual(response.status_code, 204)
 
         response = self.app.get("/" + topic + "/")
@@ -42,7 +42,7 @@ class FlafskaTestCase(unittest.TestCase):
         group = random_ascii_string()
 
         response = self.app.post("/" + topic + "/",
-                data=json.dumps(message))
+                                 data=json.dumps(message))
         self.assertEqual(response.status_code, 204)
 
         response = self.app.get("/" + topic + "/" + group + "/")
@@ -63,7 +63,7 @@ class FlafskaTestCase(unittest.TestCase):
         message = {"messages": [random_ascii_string()]}
 
         response = self.app.post("/" + topic + "/",
-                data=json.dumps(message))
+                                 data=json.dumps(message))
         self.assertEqual(response.status_code, 204)
 
         group = "group_1"
@@ -85,7 +85,7 @@ class FlafskaTestCase(unittest.TestCase):
         message = {"messages": [random_ascii_string()]}
 
         response = self.app.post("/" + topic + "/",
-                data=json.dumps(message))
+                                 data=json.dumps(message))
         self.assertEqual(response.status_code, 204)
 
         group = "group"
@@ -105,7 +105,7 @@ class FlafskaTestCase(unittest.TestCase):
         message = {"messages": ["hello %i" % i for i in range(400)]}
 
         response = self.app.post("/" + topic + "/",
-                data=json.dumps(message))
+                                 data=json.dumps(message))
         self.assertEqual(response.status_code, 204)
 
         for _ in range(20):
