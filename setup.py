@@ -5,6 +5,7 @@ Push/Pull on Kafka over HTTP
 
 from setuptools import setup
 from subprocess import check_output as run
+from subprocess import CalledProcessError
 import sys
 import os
 
@@ -17,7 +18,7 @@ if os.getenv("TRAVIS") is not None:
         GIT_VERSION = run(["git", "describe"]).decode().strip()
         if not GIT_VERSION.startswith(__version__):
             sys.exit("The git tag does not match the version. Please fix.")
-    except subprocess.CalledProcessError:
+    except CalledProcessError:
         pass
 
 setup(
