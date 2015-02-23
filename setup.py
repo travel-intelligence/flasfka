@@ -13,9 +13,12 @@ from flasfka import __version__
 
 
 if os.getenv("TRAVIS") is not None:
-    GIT_VERSION = run(["git", "describe"]).decode().strip()
-    if not GIT_VERSION.startswith(__version__):
-        sys.exit("The version in git and in the code don't match. Please fix.")
+    try:
+        GIT_VERSION = run(["git", "describe"]).decode().strip()
+        if not GIT_VERSION.startswith(__version__):
+            sys.exit("The git tag does not match the version. Please fix.")
+    except subprocess.CalledProcessError:
+        pass
 
 setup(
     name="flasfka",
