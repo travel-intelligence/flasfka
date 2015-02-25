@@ -113,3 +113,11 @@ class FlafskaTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             body = json.loads(response.data)
             self.assertLessEqual(len(body['messages']), 10)
+
+    def test_send_wrong_messages(self):
+        topic = random_ascii_string()
+        message = {"messages": [{"a": "dictionary"}]}
+
+        response = self.app.post("/" + topic + "/",
+                                 data=json.dumps(message))
+        self.assertEqual(response.status_code, 400)
