@@ -90,7 +90,8 @@ def flasfka(topic, group_or_key=None):
                 {}
             ))
 
-
-@app.route("/version/")
-def version():
-    return __version__
+# Snippet to attach the version to every request
+@app.after_request
+def add_version_header(response):
+    response.headers["X-Flasfka-Version"] = __version__
+    return response
