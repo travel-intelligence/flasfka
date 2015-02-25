@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 # "import flask" is wrapped in a try/catch clause for setup.py to get the
-# version without having flask
+# version without requiring flask
 try:
     import flask
     app = flask.Flask(__name__)
