@@ -75,6 +75,12 @@ Flafska only accepts json data, so your messages need to be in utf-8. If
 you want to pass arbitrary data, it is recommended to encode them to a
 suitable format before (e.g. base64).
 
+See also
+========
+
+Rudimentary (fpm-based) `Debian package
+<https://github.com/travel-intelligence/flasfka-deb>`_
+
 .. |Build Status| image:: https://travis-ci.org/travel-intelligence/flasfka.svg?branch=master
     :target: https://travis-ci.org/travel-intelligence/flasfka
 
