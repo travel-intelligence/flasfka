@@ -12,7 +12,12 @@ import os
 
 from flasfka import __version__
 
-
+# Travis uploads our releases on pypi when the tests are passing and there
+# is a new tag.
+#
+# When this happens, we want to make sure that the version in the code
+# (see flasfka/__init___.py) is in sync with the git tag. This snippet
+# performs the check.
 if os.getenv("TRAVIS") is not None:
     try:
         GIT_VERSION = run(["git", "describe"]).decode().strip()
