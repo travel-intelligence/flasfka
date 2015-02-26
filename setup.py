@@ -38,6 +38,7 @@ setup(
                  "archive/%s.tar.gz" % __version__,
     packages=["flasfka"],
     classifiers=[
+        'Operating System :: POSIX :: Linux',
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
