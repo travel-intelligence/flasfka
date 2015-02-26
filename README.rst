@@ -28,14 +28,18 @@ are available. Put this in a file (for example ``/etc/flasfka.conf.py``):
     # Hosts in the kafka cluster (list of ip:port)
     HOSTS=["localhost:9092"]
 
-    # What group to use when listening to a topic
-    DEFAULT_GROUP="flasfka"
+    # You probably don't need to change these
 
     # How long to wait when polling a topic for new messages
     CONSUMER_TIMEOUT=0.1
 
     # Maximum of messages returned when consuming from a topic
     CONSUMER_LIMIT=100
+
+    # When you don't specify a group for listening to a topic, flasfka
+    # will use this one
+    DEFAULT_GROUP="flasfka"
+
 
 The file will be read at flasfka startup, provided it is in the
 environment variable ``FLASFKA_CONFIG``:
