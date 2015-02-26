@@ -20,9 +20,8 @@ Alternatively, you can build and use the `debian package
 Configuration
 =============
 
-The second step is to set up flasfka to talk to the Kafka cluster. To do
-so, the following variables are available. Put this in a file (for example
-``/etc/flasfka.conf.py``):
+To set up flasfka to talk to the Kafka cluster, the following variables
+are available. Put this in a file (for example ``/etc/flasfka.conf.py``):
 
 ::
 
