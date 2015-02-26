@@ -8,5 +8,5 @@ try:
     import flask
     app = flask.Flask(__name__)
     from . import api
-except ImportError: # pragma: no cover
+except ImportError:
     pass
