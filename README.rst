@@ -15,7 +15,7 @@ You can install kafka with pip:
     pip install kafka
 
 Alternatively, you can build and use the `debian package
-<https://github.com/travel-intelligence/flasfka-deb>`_
+<https://github.com/travel-intelligence/flasfka-deb>`_.
 
 Configuration
 =============
@@ -47,6 +47,16 @@ environment variable ``FLASFKA_CONFIG``:
 ::
 
     export FLASFKA_CONFIG=/etc/flasfka.conf.py
+
+Running flasfka is then just a matter of launching:
+
+::
+
+    flasfka-serve
+
+By default, it runs on the port ``5000``. Use ``flasfka-serve -h`` to
+learn how to change that. The debian package wraps flasfka into a uwsgi
+service, so you don't need to worry about this if you are using it.
 
 Usage
 =====
